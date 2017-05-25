@@ -6,3 +6,6 @@ mjkim610/sample_code/
 mjkim610/results.txt
 *.idea/
 
+# python
+*.pyc
+

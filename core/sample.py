@@ -1,4 +1,11 @@
+import sys
 import requests
+from modules.something import something
+
+########
+# Usage
+# python sample.py [key]
+########
 
 URL = 'http://220.230.122.163/'
 START = 'api/start'
@@ -8,18 +15,9 @@ STATUS = 'api/status'
 KEY = 'user_fish'
 
 
-def something(url):
-    if len(url) > 100:
-        answer = "P"
-    else:
-        answer = "U"
-    return answer
-
-
-try:
+def start():
     res = requests.post(URL+START, json={'key': KEY, 'type': "N"})
     print('start', res.status_code)
-    left = res.json()['left']
     url = res.json()['url']
 
     while True:
@@ -28,7 +26,7 @@ try:
         left = res.json()[u'left']
         url = res.json()[u'url']
         if left <= 1:
-            res = requests.post(URL+SUBMIT, json={'key': KEY, 'answer': answer})
+            requests.post(URL+SUBMIT, json={'key': KEY, 'answer': answer})
             break
 
         if left % 100 == 0:
@@ -38,9 +36,26 @@ try:
     print('status', res.status_code)
     print(res.text)
 
-except:
-    print('error!')
 
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        KEY = sys.argv[1]
+    try:
+        start()
+    except ValueError as e:
+        print(e)
+        print('error!')
+        res = requests.post(URL+STOP, json={'key': KEY})
+        print('stop', res.status_code)
+    except requests.exceptions.RequestException as e:
+        print(e)
+        print('error!')
+        res = requests.post(URL+STOP, json={'key': KEY})
+        print('stop', res.status_code)
+    except AttributeError as e:
+        print(e)
+        print('error!')
+        res = requests.post(URL+STOP, json={'key': KEY})
+        print('stop', res.status_code)
 
-res = requests.post(URL+STOP, json={'key': KEY})
-print('stop', res.status_code)
+    print('end!')

@@ -5,3 +5,6 @@
 mjkim610/sample_code/
 *.idea/
 
+# python
+*.pyc
+

@@ -1,29 +1,33 @@
-from urllib2 import *
 import requests
 
 def main(self):
-	if get_status_code(self) == 'exist':
-		return	url_name_check(self)
-	if get_status_code(self) == 'U':
-		return get_status_code(self)
+	result = get_status_code(self)
+	if result == 'exist':
+		result = url_name_check(self)
+	else:
+		result = "U"
+	return result
+
 
 def get_status_code(self):
 	try:
-		response = requests.get(self)
-		#print response.status_code
+		response = requests.get(self, timeout=3)
 		status = "exist"
 	except requests.ConnectionError, e:
+		status = "U"
+	except requests.exceptions.Timeout:
 		status = "U"
 	return status
 
 def url_name_check(self):
+	status = "U"
 	url = self.rstrip()
-	print "Now...", url
-	if(url[0:7].find("https")):
+	# print "Now...", url
+	if(url[0:7].find("https") == 1):
 		#print "Safe:",url
-		status = "S"
+		status = "SL"
 
-	if(url.find("@")!=-1):
+	if(url.find("@") != -1):
 		#print "phishing:",url
 		status = "P"
 
@@ -31,11 +35,11 @@ def url_name_check(self):
 		#print "phishing:",url
 		status = "P"
 
-	if(url[7:].find("//")):
+	if(url[7:].find("//") != -1):
 		#print "phishing:",url
 		status = "P"
 
-	if(url[7:].find("http")):
+	if(url[7:].find("http") != -1):
 		#print "phishing",url
 		status = "P"
 

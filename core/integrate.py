@@ -4,7 +4,7 @@ from modules.count_numOfdot import numOfdot
 from modules.has_password_field import has_password_field
 from modules.is_masquerading import is_masquerading
 from modules.html_has_same_domain import html_has_same_domain
-
+from modules.uses_stylesheet_naver import uses_stylesheet_naver
 
 def integrate(url):
     result = "U"
@@ -19,6 +19,9 @@ def integrate(url):
         if r != "U":
             return r
         r = has_password_field(resp)
+        if r != "U":
+            return r
+        r = uses_stylesheet_naver(resp)
         if r != "U":
             return r
 

@@ -5,5 +5,5 @@ START = 'api/start'
 STOP = 'api/stop'
 KEY = 'user_fish'
 
-res = requests.post(URL+START, {'key': 'KEY', 'type': "N"})
+res = requests.post(URL+START, json={'key': KEY, 'type': "N"})
 print(res.text)

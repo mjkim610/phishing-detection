@@ -16,7 +16,7 @@ def is_naver_domain(url):
     domain = url[domain_start + 1:domain_end]
 
     if domain == "naver.com":
-        answer = "SL"
+        answer = "S"
     else:
         answer = "U"
 
@@ -29,18 +29,18 @@ def url_name_check(url):
     url = url.rstrip()
 
     if url[0:7].find("https") == 1:
-        status = "SL"
+        return "S"
 
     if url.find("@") != -1:
-        status = "P"
+        return "P"
 
     if len(url) >= 75:
-        status = "P"
+        return "P"
 
     if url[7:].find("//") != -1 :
-        status = "P"
+        return "P"
 
     if url[7:].find("http") != -1 :
-        status = "P"
+        return "P"
 
     return status

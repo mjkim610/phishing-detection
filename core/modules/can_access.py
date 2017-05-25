@@ -1,5 +1,5 @@
 import requests
-
+import socket
 
 def can_access(url):
     print('can_access')
@@ -12,5 +12,7 @@ def can_access(url):
     except requests.exceptions.Timeout as e:
         print e
     except requests.TooManyRedirects as e:
+        print e
+    except socket.error as e:
         print e
     return answer

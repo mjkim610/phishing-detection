@@ -12,7 +12,7 @@ START = 'api/start'
 STOP = 'api/stop'
 SUBMIT = 'api/submit'
 STATUS = 'api/status'
-KEY = 'user_fish'
+KEY = 'user_dog'
 
 
 def start():

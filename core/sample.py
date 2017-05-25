@@ -21,8 +21,9 @@ def start():
     url = res.json()['url']
 
     while True:
+        print(url)
         answer = integrate(url)
-        print url, answer
+        print(answer)
         res = requests.post(URL+SUBMIT, json={'key': KEY, 'answer': answer})
         left = res.json()[u'left']
         url = res.json()[u'url']

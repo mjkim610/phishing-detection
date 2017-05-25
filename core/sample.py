@@ -1,6 +1,6 @@
 import sys
 import requests
-from modules.something import something
+from integrate import integrate
 
 ########
 # Usage
@@ -21,7 +21,7 @@ def start():
     url = res.json()['url']
 
     while True:
-        answer = something(url)
+        answer = integrate(url)
         res = requests.post(URL+SUBMIT, json={'key': KEY, 'answer': answer})
         left = res.json()[u'left']
         url = res.json()[u'url']

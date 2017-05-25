@@ -5,5 +5,6 @@ def can_access(url):
         current_page = (requests.get(url).text, 'lxml')
         answer = "SL"
     except requests.exceptions.ConnectionError:
-        answer = "PL"
+        print("ERROR: Page is inaccessible, return U and move to next case.")
+        answer = "U"
     return answer

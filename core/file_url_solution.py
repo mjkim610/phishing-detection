@@ -20,4 +20,4 @@ for url in content:
         l.append(url)
 
 print "====== Unknown list ======"
-print url
+print '\n'.join(l)

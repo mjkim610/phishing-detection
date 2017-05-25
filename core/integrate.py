@@ -24,7 +24,7 @@ def integrate(url):
         if r != "U":
             print "Detect By ", mod
             return r
-        r = uses_stylesheet_naver(resp)
+        r, mod = uses_stylesheet_naver(resp)
         if r != "U":
             return r
 

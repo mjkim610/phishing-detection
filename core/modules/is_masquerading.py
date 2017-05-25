@@ -8,6 +8,8 @@ def is_masquerading(url):
                 return "S"
             else:
                 return "P"
+        else:
+            return "U"
 
 def get_domain(url):
     temp = url.index("/")

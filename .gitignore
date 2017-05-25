@@ -1,0 +1,7 @@
+# OSX
+*.DS_Store
+
+# mjkim610
+mjkim610/sample_code/
+*.idea/
+

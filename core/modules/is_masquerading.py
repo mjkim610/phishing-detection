@@ -1,15 +1,16 @@
 DOMAIN_LIST = ["naver", "daum", "nate",]
 
 def is_masquerading(url):
+    mod = 'is_masquerading'
     for domain_keyword in DOMAIN_LIST:
         if domain_keyword in url.lower():
             domain = get_domain(url)
             if domain_keyword in domain:
-                return "S"
+                return "S", mod
             else:
-                return "P"
+                return "P", mod
         else:
-            return "U"
+            return "U", mod
 
 def get_domain(url):
     temp = url.index("/")

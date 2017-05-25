@@ -13,6 +13,7 @@ def get_root_domain(url):
 
 
 def html_has_same_domain(url, resp):
+    mod = 'html_has_same_domain'
     cnt = 0
     root = get_root_domain(url)
 
@@ -23,5 +24,5 @@ def html_has_same_domain(url, resp):
             cnt += 1
 
     if cnt >= 1:
-        return "S"
-    return "U"
+        return "S", mod
+    return "U", mod

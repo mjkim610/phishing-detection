@@ -11,11 +11,11 @@ def numOfdot(url):
 		for compare in splited_list:
 			if country == compare:
 				count = count - 1
-				
+
 	if count <= 1:
 		return 'S'
-	
+
 	elif count == 2:
 		return 'PL'
 	else:
-		return 'P'	
+		return 'P'

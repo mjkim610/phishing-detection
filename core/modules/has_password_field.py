@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # 이 함수는 password field가 없을 경우 바로 phishing site가 아닌 것으로
 # 간주하기 위해 사용할 수 있을 것 같습니다
 def has_password_field(resp):
-    print('has_password_field')
+    mod = 'has_password_field'
     answer = "U"
 
     current_page = BeautifulSoup(resp.text, 'lxml')
@@ -15,4 +15,4 @@ def has_password_field(resp):
     if len(password_field) == 0:
         answer = "S"
 
-    return answer
+    return answer, mod

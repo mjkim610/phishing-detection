@@ -11,4 +11,5 @@ with open(file) as f:
 content = [x.strip() for x in content]
 
 for url in content:
-    print url, '//', integrate(url)
+    print url
+    print integrate(url)

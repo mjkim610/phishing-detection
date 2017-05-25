@@ -9,17 +9,24 @@ from modules.html_has_same_domain import html_has_same_domain
 def integrate(url):
     result = "U"
 
-    r = is_masquerading(url)
+    r, mod = is_masquerading(url)
     if r != "U":
+        print "Detect By ", mod
         return r
 
-    r, resp = can_access(url)
+    r, resp, mod = can_access(url)
     if r != "U":
-        r = html_has_same_domain(url, resp)
+        r, mod = html_has_same_domain(url, resp)
         if r != "U":
+            print "Detect By ", mod
             return r
-        r = has_password_field(resp)
+        r, mod = has_password_field(resp)
         if r != "U":
+            print "Detect By ", mod
             return r
 
+    if result == "U":
+        mod = "* Nothing! *"
+
+    print "Detect By ", mod
     return result

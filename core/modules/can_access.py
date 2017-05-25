@@ -2,7 +2,7 @@ import requests
 import socket
 
 def can_access(url):
-    print('can_access')
+    mod = 'can_access'
     answer = "U"
     response = None
     try:
@@ -19,4 +19,4 @@ def can_access(url):
         print e
     except socket.error as e:
         print e
-    return answer, response
+    return answer, response, mod

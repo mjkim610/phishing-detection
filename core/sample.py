@@ -22,6 +22,7 @@ def start():
 
     while True:
         answer = integrate(url)
+        print url, answer
         res = requests.post(URL+SUBMIT, json={'key': KEY, 'answer': answer})
         left = res.json()[u'left']
         url = res.json()[u'url']
@@ -44,17 +45,17 @@ if __name__ == '__main__':
         start()
     except ValueError as e:
         print(e)
-        print('error!')
+        print('value error!')
         res = requests.post(URL+STOP, json={'key': KEY})
         print('stop', res.status_code)
     except requests.exceptions.RequestException as e:
         print(e)
-        print('error!')
+        print('request error!')
         res = requests.post(URL+STOP, json={'key': KEY})
         print('stop', res.status_code)
     except AttributeError as e:
         print(e)
-        print('error!')
+        print('attribute error error!')
         res = requests.post(URL+STOP, json={'key': KEY})
         print('stop', res.status_code)
 

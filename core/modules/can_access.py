@@ -4,8 +4,10 @@ import socket
 def can_access(url):
     print('can_access')
     answer = "U"
+    response = None
     try:
-        current_page = (requests.get(url, timeout=3).text, 'lxml')
+        response = requests.get(url, timeout=3)
+        current_page = (response.text, 'lxml')
         answer = "SL"
     except requests.exceptions.ConnectionError:
         print("ERROR: Page is inaccessible, return U and move to next case.")
@@ -13,6 +15,8 @@ def can_access(url):
         print e
     except requests.TooManyRedirects as e:
         print e
+    except requests.exceptions.ChunkedEncodingError as e:
+        print e
     except socket.error as e:
         print e
-    return answer
+    return answer, response

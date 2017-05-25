@@ -1,4 +1,3 @@
-import requests
 from bs4 import BeautifulSoup as bs
 
 
@@ -13,11 +12,11 @@ def get_root_domain(url):
     return False
 
 
-def html_has_same_domain(url):
+def html_has_same_domain(url, resp):
     cnt = 0
     root = get_root_domain(url)
 
-    current_page = bs(requests.get(url).text, 'lxml')
+    current_page = bs(resp.text, 'lxml')
     for tag in current_page.find_all('a'):
         in_url = get_root_domain(tag.get('href'))
         if in_url == root:

@@ -12,5 +12,5 @@ def uses_stylesheet_naver(resp):
 
     for stylesheet in stylesheets:
         if "naver.com" in stylesheet['href']:
-            return "P"
+            return "P", mod
     return answer, mod

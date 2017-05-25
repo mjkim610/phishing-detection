@@ -6,6 +6,7 @@ from modules.is_masquerading import is_masquerading
 from modules.html_has_same_domain import html_has_same_domain
 from modules.uses_stylesheet_naver import uses_stylesheet_naver
 
+
 def integrate(url):
     result = "U"
 
@@ -26,6 +27,7 @@ def integrate(url):
             return r
         r, mod = uses_stylesheet_naver(resp)
         if r != "U":
+            print "Detect By ", mod
             return r
 
     if result == "U":

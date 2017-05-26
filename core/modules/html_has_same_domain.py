@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as bs
 from get_root_domain import get_root_domain
 
-
 def html_has_same_domain(url, resp):
     mod = 'html_has_same_domain'
     cnt = 0
@@ -13,6 +12,8 @@ def html_has_same_domain(url, resp):
             in_url = get_root_domain(tag.get('href'))
             if in_url == root:
                 cnt += 1
+        if ("naver" in tag.text.lower()):
+            return "P", mod
 
     if cnt >= 1:
         return "S", mod

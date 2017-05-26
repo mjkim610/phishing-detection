@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from html_has_same_domain import get_root_domain
+from get_root_domain import get_root_domain
 
 
 def check_title(url, resp):
@@ -7,10 +7,14 @@ def check_title(url, resp):
     correct_title = ["네이버 : 로그인", "Naver Sign in", "NAVER 登录", "NAVER 登入"]
     body = resp.text
     title = body.split('title>')
-    current_title = title[1][:-2]
+    current_title = ""
+    if len(title) > 1:
+        current_title = title[1][:-2]
     if current_title in correct_title:
         if get_root_domain(url) != 'naver.com':
             print get_root_domain(url)
             return "P", mod
+        else:
+            return "S", mod
 
     return "U", mod

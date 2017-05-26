@@ -1,3 +1,4 @@
+from modules.check_title import check_title
 from modules.can_access import can_access
 from modules.has_password_field import has_password_field
 from modules.is_masquerading import is_masquerading
@@ -24,6 +25,10 @@ def integrate(url):
             print "Detect By ", mod
             return r
         r, mod = uses_stylesheet_naver(resp)
+        if r != "U":
+            print "Detect By ", mod
+            return r
+        r, mod = check_title(url, resp)
         if r != "U":
             print "Detect By ", mod
             return r

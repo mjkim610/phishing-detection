@@ -12,8 +12,6 @@ def html_has_same_domain(url, resp):
             in_url = get_root_domain(tag.get('href'))
             if in_url == root:
                 cnt += 1
-        if ("naver" in tag.text.lower()):
-            return "P", mod
 
     if cnt >= 1:
         return "S", mod

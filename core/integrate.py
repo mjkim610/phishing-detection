@@ -5,6 +5,7 @@ from modules.is_masquerading import is_masquerading
 from modules.html_has_same_domain import html_has_same_domain
 from modules.uses_stylesheet_naver import uses_stylesheet_naver
 from modules.favicon import favicon
+from modules.check_validOfpost_action import check_validOfpost_action
 
 def integrate(url):
     result = "U"
@@ -36,10 +37,15 @@ def integrate(url):
         if r != "U":
             print "Detect By ", mod
             return r
+        # r, mod = check_validOfpost_action(resp)
+        # if r != "U":
+        #     print "Detect By ", mod
+        #     return r
         print "Detect By * Nothing! *"
         return "S"
 
     if result == "U":
+        result = "S"
         mod = "* can_access FAILED *"
 
     print "Detect By ", mod

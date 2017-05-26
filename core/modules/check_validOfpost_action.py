@@ -8,13 +8,13 @@ def check_validOfpost_action(resp):
 	found = soup.find_all('form', method = "post")
 	
 	if len(found) == 0:
-		return answer,mod
+		return answer, mod
 	else:
 		for action in found:
 			a = action.get('action')
 			if a:
-				if 'php' in a:
-					answer = "p"
+				if 'php' not in a:
+					answer = "P"
 				else:
 					answer = "S"
 				

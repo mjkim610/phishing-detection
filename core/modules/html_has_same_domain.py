@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as bs
 from get_root_domain import get_root_domain
 
-
 def html_has_same_domain(url, resp):
     mod = 'html_has_same_domain'
     cnt = 0

@@ -10,6 +10,8 @@ def check_title(url, resp):
     current_title = ""
     if len(title) > 1:
         current_title = title[1][:-2]
+    if isinstance(current_title, unicode):
+        correct_title = [title.decode('utf-8') for title in correct_title]
     if current_title in correct_title:
         if get_root_domain(url) != 'naver.com':
             print get_root_domain(url)

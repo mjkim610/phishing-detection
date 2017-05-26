@@ -31,9 +31,12 @@ def integrate(url):
         if r != "U":
             print "Detect By ", mod
             return r
+        else:
+            print "Detect By * Nothing! *"
+            return "S"
 
     if result == "U":
-        mod = "* Nothing! *"
+        mod = "* can_access FAILED *"
 
     print "Detect By ", mod
     return result

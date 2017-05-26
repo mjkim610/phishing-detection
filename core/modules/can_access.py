@@ -6,7 +6,7 @@ def can_access(url):
     answer = "U"
     response = None
     try:
-        response = requests.get(url, timeout=3)
+        response = requests.get(url, timeout=5)
         current_page = (response.text, 'lxml')
         answer = "SL"
     except requests.exceptions.ConnectionError:

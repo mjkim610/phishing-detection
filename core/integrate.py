@@ -4,6 +4,7 @@ from modules.has_password_field import has_password_field
 from modules.is_masquerading import is_masquerading
 from modules.html_has_same_domain import html_has_same_domain
 from modules.uses_stylesheet_naver import uses_stylesheet_naver
+from modules.favicon import favicon
 
 def integrate(url):
     result = "U"
@@ -31,9 +32,12 @@ def integrate(url):
         if r != "U":
             print "Detect By ", mod
             return r
-        else:
-            print "Detect By * Nothing! *"
-            return "S"
+        r, mod = favicon(url, resp)
+        if r != "U":
+            print "Detect By ", mod
+            return r
+        print "Detect By * Nothing! *"
+        return "S"
 
     if result == "U":
         mod = "* can_access FAILED *"

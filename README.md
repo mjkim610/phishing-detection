@@ -1,10 +1,17 @@
-# 요구사항
-- 정상/피싱 URL이 담긴 URL에서 네이버 로그인 피싱을 탐지한다.
+# Phishing Detection
+![Hack Day Logo](hack-day-logo.png) Project at <a href="http://www.ajunews.com/view/20170526135211042">Naver Campus Hack Day 2017<a>
+---
 
-# Point
-- 문제를 해결하기 위한 과정과 적절한 알고리즘을 사용여부.
-- 피싱 페이지의 정탐율.
-- 정상 페이지의 오탐율.
+## Overview
+This is a phishing site detection system that accepts URL as an argument and returns a string value describing whether the website is a phishing site or not.
 
-# 개발언어/플랫폼
-자율, 자율
+## Evaluation method
+- Effectiveness and appropriateness of algorithms used to detect phishing sites.
+- Accuracy of system
+    - True positive
+    - False positive
+    - True negative
+    - False negative
+
+## Language
+The code is written in python 2.7. Please check the [requirements](requirements.txt) for dependencies.

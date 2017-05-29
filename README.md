@@ -1,5 +1,5 @@
 # Phishing Detection
-![Hack Day Logo](hack-day-logo.png) Project at <a href="http://www.ajunews.com/view/20170526135211042">Naver Campus Hack Day 2017<a>
+![Hack Day Logo](docs/img/hack-day-logo.png) Project at <a href="http://www.ajunews.com/view/20170526135211042">Naver Campus Hack Day 2017<a>
 ---
 
 ## Overview

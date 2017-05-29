@@ -4,7 +4,7 @@ from integrate import integrate
 
 ########
 # Usage
-# python sample.py [key]
+# python hackday.py [key]
 ########
 
 URL = 'http://220.230.122.163/'

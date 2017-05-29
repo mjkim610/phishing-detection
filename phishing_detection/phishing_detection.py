@@ -1,5 +1,4 @@
 import sys
-import requests
 from integrate import integrate
 
 ########
@@ -14,9 +13,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         url = sys.argv[1]
     try:
-        result = integrate(url)
-        print("Checking: " + url)
-        print("Result: " + result)
+        integrate(url)
     except:
         print("Error has occurred.")
-    print('-----Terminating.-----')
+    print('----------Terminating----------')

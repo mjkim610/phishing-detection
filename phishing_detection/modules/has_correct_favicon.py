@@ -1,10 +1,9 @@
 from bs4 import BeautifulSoup
-import urllib
 import re
 import requests
 from urlparse import *
 
-def favicon(url, resp):
+def has_correct_favicon(url, resp):
 	status = 'U'
 	mod = 'favicon'
 	string =""
@@ -22,7 +21,6 @@ def favicon(url, resp):
 				if rel.get('href').find("http") != -1:
 					print rel.get('href')
 					print "if"
-					#answer = get_root_domain(rel.get('href'))
 					print rel.get('href')
 					answer = urlparse(rel.get('href')).netloc
 					print answer,string

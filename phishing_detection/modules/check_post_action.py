@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
-def check_validOfpost_action(resp):
-	mod = 'check_validOfpost_action'
+def check_post_action(resp):
+	mod = 'check_post_action'
 	answer = "U"
 	
 	soup = BeautifulSoup(resp.text, 'lxml')

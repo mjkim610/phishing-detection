@@ -9,8 +9,8 @@ def can_access(url):
         response = requests.get(url, timeout=5)
         current_page = (response.text, 'lxml')
         answer = "SL"
-    except requests.exceptions.ConnectionError:
-        print("ERROR: Page is inaccessible, return U and move to next case.")
+    except requests.exceptions.ConnectionError as e:
+        print e
     except requests.exceptions.Timeout as e:
         print e
     except requests.TooManyRedirects as e:

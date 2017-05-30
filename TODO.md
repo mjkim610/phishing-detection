@@ -1,0 +1,3 @@
+- Provide 2 modes for phishing_detection.py
+    - if-else cases to return a conclusion ASAP (which is the current method)
+    - Run urls through all the detection modules and calculate a percentage score

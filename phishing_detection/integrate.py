@@ -11,10 +11,10 @@ UNKNOWN = "U"
 
 def finish_check(mod, result):
     print("Determined by:\t" + mod)
-    print("Result:\t\t\t" + result)
+    print("Result:\t\t" + result)
 
 def integrate(url):
-    print("Checking:\t\t" + url)
+    print("Checking:\t" + url)
 
     result = UNKNOWN
 

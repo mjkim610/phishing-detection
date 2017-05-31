@@ -6,7 +6,6 @@ from urlparse import *
 def has_correct_favicon(url, resp):
 	status = 'U'
 	mod = 'favicon'
-	string =""
 	parse = urlparse(url)
 
 	try:

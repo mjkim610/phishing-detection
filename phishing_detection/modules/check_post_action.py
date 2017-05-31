@@ -9,13 +9,12 @@ def check_post_action(resp):
 	
 	if len(found) == 0:
 		return answer, mod
-	else:
-		for action in found:
-			a = action.get('action')
-			if a:
-				if 'php' not in a:
-					answer = "P"
-				else:
-					answer = "S"
+	for action in found:
+		a = action.get('action')
+		if a:
+			if 'php' not in a:
+				answer = "P"
+			else:
+				answer = "S"
 				
 		return answer, mod

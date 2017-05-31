@@ -1,11 +1,11 @@
 from modules.can_access import can_access
 from modules.check_post_action import check_post_action
-from modules.check_title import check_title
 from modules.has_correct_favicon import has_correct_favicon
 from modules.has_password_field import has_password_field
 from modules.html_has_same_domain import html_has_same_domain
 from modules.is_masquerading import is_masquerading
-from modules.uses_stylesheet_naver import uses_stylesheet_naver
+from modules.naver.check_title import check_title
+from modules.naver.uses_stylesheet_naver import uses_stylesheet_naver
 
 UNKNOWN = "U"
 

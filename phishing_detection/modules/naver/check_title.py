@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from get_root_domain import get_root_domain
-
+from .. import get_root_domain
 
 def check_title(url, resp):
     mod = 'check_title'

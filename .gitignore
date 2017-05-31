@@ -5,7 +5,7 @@
 .idea
 
 # Sample files
-phishing_detection/files/results.txt
+phishing_detection/files/results.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

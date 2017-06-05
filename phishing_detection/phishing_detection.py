@@ -1,12 +1,15 @@
 import sys, getopt
 from integrate import integrate
+from calculate_probability import calculate_probability
 
 ########
 # Usage
-# python phishing_detection.py -s [string] -f [file]
+# python phishing_detection.py -u <url> -i <input_file> -o <output_file>
 ########
 
 DEFAULT_URL = "https://www.naver.com/"
+DEFAULT_INPUT_FILE_PATH = "files/urls.csv"
+DEFAULT_OUTPUT_FILE_PATH = "files/results.csv"
 
 def call_integrate(url):
     try:
@@ -16,7 +19,7 @@ def call_integrate(url):
 
 def call_integrate_for_file(input_file_path, output_file_path):
     with open(input_file_path, "r") as input_file:
-        with open(output_file_path, "w") as output_file:  # this causes error when calling from a different path
+        with open(output_file_path, "w") as output_file: # this causes error when calling from a different path
             # write header
             output_file.write("url,verdict\n")
 
@@ -31,16 +34,16 @@ def call_integrate_for_file(input_file_path, output_file_path):
 
 def main(argv):
     url = DEFAULT_URL
-    has_infile = False
-    has_outfile = False
-    input_file_path = "files/urls.csv"
-    output_file_path = "files/results.csv"
+    has_input_file = False
+    has_output_file = False
+    input_file_path = DEFAULT_INPUT_FILE_PATH
+    output_file_path = DEFAULT_OUTPUT_FILE_PATH
 
     try:
-        opts, args = getopt.getopt(argv, "hs:i:o:", ["help", "string=", "infile=", "outfile="])
+        opts, args = getopt.getopt(argv, "hu:i:o:t", ["help", "url=", "inputfile=", "outputfile=", "test="])
     except getopt.GetoptError:
         print("Error(000): invalid options")
-        print("phishing_detection.py -s <string> -i <input_file> -o <output_file>")
+        print("phishing_detection.py -u <url> -i <input_file> -o <output_file>")
         return
 
     if (not opts):
@@ -49,22 +52,24 @@ def main(argv):
     else:
         for opt, arg in opts:
             if opt in ("-h", "--help"):
-                print("phishing_detection.py -s <string> -i <input_file> -o <output_file>")
+                print("phishing_detection.py -u <url> -i <input_file> -o <output_file>")
                 return
-            elif opt in ("-s", "--string"):
+            elif opt in ("-u", "--url"):
                 url = arg
                 call_integrate(url)
-            elif opt in ("-i", "--infile"):
-                has_infile = True
+            elif opt in ("-i", "--inputfile"):
+                has_input_file = True
                 input_file_path = arg
-            elif opt in ("-o", "--outfile"):
-                has_outfile = True
+            elif opt in ("-o", "--outputfile"):
+                has_output_file = True
                 output_file_path = arg
+            elif opt in ("-t", "--test"):
+                calculate_probability()
 
-            if (has_outfile and not has_infile):
-                print("Error(002): requires input_file")
-            if (has_infile):
-                call_integrate_for_file(input_file_path, output_file_path)
+        if (has_output_file and not has_input_file):
+            print("Error(002): requires input_file")
+        if (has_input_file):
+            call_integrate_for_file(input_file_path, output_file_path)
 
 if __name__ == "__main__":
     print("===============Starting phishing_detection.py===============")

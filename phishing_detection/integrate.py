@@ -51,10 +51,10 @@ def integrate(url):
             return result
         else:
             result = "S"
-            mod = "*Nothing*"
+            mod = "NOTHING"
     else:
         result = "S"
-        mod = "*Page inaccessible*"
+        mod = "PAGE INACCESSIBLE"
 
     finish_check(mod, result)
     return result

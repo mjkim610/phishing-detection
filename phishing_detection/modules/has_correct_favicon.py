@@ -12,17 +12,12 @@ def has_correct_favicon(url, resp):
 		current_page = BeautifulSoup(resp.text,'lxml')
 		if parse.netloc.find("www.") != -1:
 			string = parse.netloc.replace("www.","")
-			print "check : %s" %string
 		else:
 			string = parse.netloc
 		for rel in current_page.find_all('link'):
 			if rel.get('href').find("favicon") != -1:
 				if rel.get('href').find("http") != -1:
-					print rel.get('href')
-					print "if"
-					print rel.get('href')
 					answer = urlparse(rel.get('href')).netloc
-					print answer,string
 					if(answer != string):
 						status = "P"
 						if(answer == ""):
@@ -33,12 +28,9 @@ def has_correct_favicon(url, resp):
 						status = "S"
 						break
 				else:
-					print "else"
-					print rel.get('href')
 					path = rel.get('href').split("/")
 					for i in path:
 						if bool(re.match('favicon(_)?(\d*).ico',i)):
-							print i
 							status = "S"
 							break
 					

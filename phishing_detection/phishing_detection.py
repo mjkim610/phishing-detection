@@ -40,10 +40,10 @@ def main(argv):
     output_file_path = DEFAULT_OUTPUT_FILE_PATH
 
     try:
-        opts, args = getopt.getopt(argv, "hu:i:o:t", ["help", "url=", "inputfile=", "outputfile=", "test="])
+        opts, args = getopt.getopt(argv, "hu:i:o:p", ["help", "url=", "inputfile=", "outputfile=", "probability="])
     except getopt.GetoptError:
         print("Error(000): invalid options")
-        print("phishing_detection.py -u <url> -i <input_file> -o <output_file>")
+        print("phishing_detection.py -u <url> -i <input_file> -o <output_file> -p <probability>")
         return
 
     if (not opts):
@@ -63,7 +63,7 @@ def main(argv):
             elif opt in ("-o", "--outputfile"):
                 has_output_file = True
                 output_file_path = arg
-            elif opt in ("-t", "--test"):
+            elif opt in ("-p", "--probability"): # include inputfile and outputfile path for this option too
                 calculate_probability()
 
         if (has_output_file and not has_input_file):

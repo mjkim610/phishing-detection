@@ -11,6 +11,6 @@ def uses_stylesheet_naver(resp):
     stylesheets = current_page.find_all('link', rel="stylesheet")
 
     for stylesheet in stylesheets:
-        if "naver.com" in stylesheet['href']:
+        if (stylesheet.has_attr('href') and "naver.com" in stylesheet['href']):
             return "P", mod
     return answer, mod

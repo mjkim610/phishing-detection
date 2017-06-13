@@ -25,11 +25,12 @@ ccTLD_list = ['ac','ad','ae','af','ag','ai','al','am','ao','aq','ar',
               'za','zm','zw']
 
 def get_root_domain(url):
-    domain = urlparse(url).netloc
-    split_domain = domain.split('.')
-    if split_domain[-1] in ccTLD_list:
-        return ".".join(split_domain[-3:])
-    else:
-        return ".".join(split_domain[-2:])
-
-    return False
+    try:
+        domain = urlparse(url).netloc
+        split_domain = domain.split('.')
+        if split_domain[-1] in ccTLD_list:
+            return ".".join(split_domain[-3:])
+        else:
+            return ".".join(split_domain[-2:])
+    except:
+        return False

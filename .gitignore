@@ -5,6 +5,8 @@
 .idea
 
 # Sample files
+samples/
+phishing_detection/files/training_set_analyzed.csv
 phishing_detection/files/results.csv
 phishing_detection/files/raw_data.csv
 

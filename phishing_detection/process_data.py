@@ -1,4 +1,5 @@
 # Load libraries
+import sys
 import pandas
 """
 from pandas.plotting import scatter_matrix
@@ -28,61 +29,71 @@ from modules.naver.uses_stylesheet_naver import uses_stylesheet_naver
 # Define constants
 TRAINING_SET = "files/training_set.csv"
 TRAINING_SET_ANALYZED = "files/training_set_analyzed.csv"
+LOG = "files/log"
+ERROR_LOG = "files/error_log"
 
 def calculate_features():
     with open(TRAINING_SET_ANALYZED, "w") as ts_analyzed: # this causes error when calling from a different path
         # write header
-        ts_analyzed.write("url,is_phishing,is_masquerading,can_access,html_has_same_domain,has_password_field,uses_stylesheet_naver,check_title,check_post_action\n")
+        ts_analyzed.write("url,is_phishing,is_masquerading,can_access,html_has_same_domain,has_password_field,check_post_action\n")
 
         with open(TRAINING_SET, "r") as training_set:
             lines = training_set.readlines()
             counter = 0
             for line in lines[1:]:
-                line = line.rstrip()
+                try:
+                    line = line.rstrip()
 
-                url = line.split(",")[0]
-                is_phishing = line.split(",")[1]
+                    url = line.split(",")[0]
+                    is_phishing = line.split(",")[1]
 
-                counter += 1
-                print("Count: " + str(counter))
-                print("Analyzing: " + url)
+                    counter += 1
+                    with open(LOG, "a+") as log:
+                        log.write("Count " + str(counter) + ": " + url + "\n")
+                        print("Count " + str(counter) + ": " + url)
+                    log.close()
 
-                ts_analyzed.write(url+",")
-                ts_analyzed.write(is_phishing+",")
+                    ts_analyzed.write(url+",")
+                    ts_analyzed.write(is_phishing+",")
 
-                # calculate each feature
-                result, mod = is_masquerading(url)
-                ts_analyzed.write(result+",")
+                    # calculate each feature
+                    result, mod = is_masquerading(url)
+                    ts_analyzed.write(result+",")
 
-                result, resp, mod = can_access(url)
-                ts_analyzed.write(result+",")
-                # if web page cannot be accessed, other modules will not work
-                if result != "U":
+                    result, resp, mod = can_access(url)
+                    ts_analyzed.write(result+",")
+                    # if web page cannot be accessed, other modules will not work
+                    if result != "U":
 
-                    result, mod = html_has_same_domain(url, resp)
-                    ts_analyzed.write(result + ",")
+                        result, mod = html_has_same_domain(url, resp)
+                        ts_analyzed.write(result + ",")
 
-                    result, mod = has_password_field(resp)
-                    ts_analyzed.write(result + ",")
+                        result, mod = has_password_field(resp)
+                        ts_analyzed.write(result + ",")
 
-                    result, mod = uses_stylesheet_naver(resp)
-                    ts_analyzed.write(result + ",")
+                        """
+                        result, mod = uses_stylesheet_naver(resp)
+                        ts_analyzed.write(result + ",")
 
-                    result, mod = check_title(url, resp)
-                    ts_analyzed.write(result + ",")
+                        result, mod = check_title(url, resp)
+                        ts_analyzed.write(result + ",")
 
-                    """
-                    result, mod = has_correct_favicon(url, resp)
-                    raw_data_file.write(result + ",")
-                    """
+                        result, mod = has_correct_favicon(url, resp)
+                        raw_data_file.write(result + ",")
+                        """
 
-                    result, mod = check_post_action(resp)
-                    ts_analyzed.write(result)
+                        result, mod = check_post_action(resp)
+                        ts_analyzed.write(result)
 
-                else:
-                    ts_analyzed.write("U,U,U,U,U,U")
+                    else:
+                        ts_analyzed.write("U,U,U")
 
-                ts_analyzed.write("\n")
+                    ts_analyzed.write("\n")
+                except:
+                    with open(ERROR_LOG, "a+") as error_log:
+                        error_log.write("Count " + str(counter) + ": " + url + "\n")
+                        error_log.write(sys.exc_info()[0])
+                    error_log.close()
         training_set.close()
     ts_analyzed.close()
 

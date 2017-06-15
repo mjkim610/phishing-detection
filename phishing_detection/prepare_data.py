@@ -33,7 +33,7 @@ def prepare_data():
                 line = line.rstrip()
                 url = line.split(",")[1]
 
-                training_set_combined.write("http://" + url + "," + "0")
+                training_set_combined.write("http://" + url + "," + "-1")
                 training_set_combined.write("\n")
                 counter += 1
 

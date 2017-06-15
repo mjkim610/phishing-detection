@@ -19,7 +19,7 @@ ERROR_LOG = "logs/error_log"
 
 def calculate_features():
 
-    def write_encoded_features(file_name, result):
+    def write_encoded_features(write_file, result):
         result_encoded = "0"
         if (result == "U"):
             result_encoded = "0"
@@ -31,15 +31,16 @@ def calculate_features():
             result_encoded = "0.5"
         elif (result == "P"):
             result_encoded = "1"
-        file_name.write("," + result_encoded)
+        write_file.write("," + result_encoded)
 
     with open(TRAINING_SET_ANALYZED, "w") as ts_analyzed: # this causes error when calling from a different path
         # write header
-        ts_analyzed.write("url,is_phishing,is_masquerading,can_access,html_has_same_domain,has_password_field,check_post_action\n")
+        ts_analyzed.write("url,is_phishing,is_masquerading,html_has_same_domain,has_password_field,check_post_action\n")
 
         with open(TRAINING_SET, "r") as training_set:
             lines = training_set.readlines()
             counter = 0
+            can_access_error_count = 0
             for line in lines[1:]:
                 try:
                     line = line.rstrip()
@@ -53,18 +54,16 @@ def calculate_features():
                         print("Count " + str(counter) + ": " + url)
                     log.close()
 
-                    ts_analyzed.write(url)
-                    ts_analyzed.write(","+is_phishing)
-
-                    # calculate each feature
-                    result, mod = is_masquerading(url)
-                    write_encoded_features(ts_analyzed, result)
-
-
-                    result, resp, mod = can_access(url)
-                    write_encoded_features(ts_analyzed, result)
                     # if web page cannot be accessed, other modules will not work
+                    result, resp, mod = can_access(url)
                     if result != "U":
+
+                        ts_analyzed.write(url)
+                        ts_analyzed.write("," + is_phishing)
+
+                        # calculate each feature
+                        result, mod = is_masquerading(url)
+                        write_encoded_features(ts_analyzed, result)
 
                         result, mod = html_has_same_domain(url, resp)
                         write_encoded_features(ts_analyzed, result)
@@ -86,12 +85,13 @@ def calculate_features():
                         result, mod = check_post_action(resp)
                         write_encoded_features(ts_analyzed, result)
 
+                        ts_analyzed.write("\n")
                     else:
-                        write_encoded_features(ts_analyzed, "U")
-                        write_encoded_features(ts_analyzed, "U")
-                        write_encoded_features(ts_analyzed, "U")
-
-                    ts_analyzed.write("\n")
+                        can_access_error_count += 1
+                        with open(LOG, "a+") as log:
+                            log.write("can_access error\n")
+                            print("can_access error")
+                        log.close()
                 except:
                     with open(ERROR_LOG, "a+") as error_log:
                         error_log.write("Count " + str(counter) + ": " + url + "\n")
